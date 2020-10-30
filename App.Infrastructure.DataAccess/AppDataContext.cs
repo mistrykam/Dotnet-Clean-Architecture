@@ -1,11 +1,12 @@
-﻿using App.Domain.Entities;
+﻿using App.Domain.Application.Framework.Interfaces;
+using App.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 
 namespace App.Infrastructure.DataAccess
 {
-    public class AppDataContext : DbContext
+    public class AppDataContext : DbContext, IAppDataContext
     {
         public DbSet<Book> Books { get; set; }
         public DbSet<Review> Reviews { get; set; }

@@ -6,7 +6,8 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using App.Infrastructure.Application.Features.Books;
+using App.Domain.Application.Features.Books;
+using App.Domain.Entities;
 
 namespace App.Client.WebUI.Pages
 {
@@ -22,6 +23,8 @@ namespace App.Client.WebUI.Pages
 
         private readonly IMediator _mediatR;
 
+        public Details.BookViewModel BookViewModel { get; set; }
+
         public IndexModel(IMediator mediatR)
         {            
             _mediatR = mediatR;
@@ -29,7 +32,7 @@ namespace App.Client.WebUI.Pages
 
         public async Task OnGet()
         {
-            var x = await _mediatR.Send(new Details.Query() { Id = 1 });
+            BookViewModel = await _mediatR.Send(new Details.Query() { Id = 1 });
         }
     }
 }
