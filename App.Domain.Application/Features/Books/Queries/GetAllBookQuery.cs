@@ -26,15 +26,17 @@ namespace App.Domain.Application.Features.Books.Queries
             private readonly IAppDataContext _db;
             private readonly IMapper _mapper;
 
-            public Handler(IAppDataContext db, IMapper _mapper)
+            public Handler(IAppDataContext db, IMapper mapper)
             {
                 _db = db;
+                _mapper = mapper;
             }
 
             public async Task<IEnumerable<BookViewModel>> Handle(Query request, CancellationToken cancellationToken)
             {
                 return await _db.Books.ProjectTo<BookViewModel>(_mapper.ConfigurationProvider)
                                       .ToListAsync();
+                                      
             }
         }
     }

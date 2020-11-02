@@ -1,0 +1,20 @@
+﻿@page
+@model App.Client.WebUI.Pages.Books.IndexModel
+@{
+}
+
+<div class="text-center">
+    <h1 class="display-4">List of Books</h1>
+</div>
+
+@foreach (var book in Model.BookViewModelList)
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-2"><label asp-for="BookViewModelList.First().Title" class="control-label"></label></div>
+            <div class="col-sm-4">
+                <h3><a asp-page="/Books/Details" asp-route-id="@book.BookId">@book.Title</a></h3>                
+            </div>
+        </div>
+    </div>
+}
