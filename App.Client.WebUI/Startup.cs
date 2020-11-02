@@ -1,3 +1,4 @@
+using App.Domain.Application;
 using App.Domain.Interfaces;
 using App.Infrastructure.DataAccess;
 using MediatR;
@@ -22,14 +23,13 @@ namespace App.Client.WebUI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddApplication();
+
             // data context
             services.AddDbContext<AppDataContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IAppDataContext>(provider => provider.GetService<AppDataContext>());
 
             services.AddRazorPages();
-
-            // MediatR: pick any class to scan
-            services.AddMediatR(typeof(App.Domain.Application.Features.Books.Queries.GetBookByIdQuery)); 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

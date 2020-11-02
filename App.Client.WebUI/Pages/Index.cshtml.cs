@@ -18,7 +18,7 @@ namespace App.Client.WebUI.Pages
 
         private readonly IMediator _mediatR;
 
-        public GetBookByIdQuery.BookViewModel BookViewModel { get; set; }
+        public BookViewModel BookViewModel { get; set; }
 
         public IndexModel(IMediator mediatR)
         {            
