@@ -1,6 +1,4 @@
-﻿using App.Domain.Application.Mappings;
-using App.Domain.Entities;
-using System;
+﻿using System;
 using System.ComponentModel;
 
 namespace App.Domain.Application.Features.Books.Queries
@@ -8,7 +6,7 @@ namespace App.Domain.Application.Features.Books.Queries
     /// <summary>
     /// Return Book View Model
     /// </summary>
-    public class BookViewModel : IMapFrom<Book>
+    public class BookViewModel
     {
         public int BookId { get; set; }
 
