@@ -9,35 +9,32 @@ using System.Threading.Tasks;
 
 namespace App.Domain.Application.Features.Books.Queries
 {
-    public class GetAllBooksQuery
+    /// <summary>
+    /// Query Parameters
+    /// </summary>
+    public class GetAllBooksQuery : IRequest<IEnumerable<BookViewModel>>
     {
-        /// <summary>
-        /// Query Parameters
-        /// </summary>
-        public class Query : IRequest<IEnumerable<BookViewModel>>
+        // no parameters
+    }
+
+    /// <summary>
+    /// Handler the request
+    /// </summary>
+    public class GetAllBooksHandler : IRequestHandler<GetAllBooksQuery, IEnumerable<BookViewModel>>
+    {
+        private readonly IAppDataContext _db;
+        private readonly IMapper _mapper;
+
+        public GetAllBooksHandler(IAppDataContext db, IMapper mapper)
         {
+            _db = db;
+            _mapper = mapper;
         }
 
-        /// <summary>
-        /// Handler the request
-        /// </summary>
-        public class Handler :  IRequestHandler<Query, IEnumerable<BookViewModel>> 
+        public async Task<IEnumerable<BookViewModel>> Handle(GetAllBooksQuery request, CancellationToken cancellationToken)
         {
-            private readonly IAppDataContext _db;
-            private readonly IMapper _mapper;
-
-            public Handler(IAppDataContext db, IMapper mapper)
-            {
-                _db = db;
-                _mapper = mapper;
-            }
-
-            public async Task<IEnumerable<BookViewModel>> Handle(Query request, CancellationToken cancellationToken)
-            {
-                return await _db.Books.ProjectTo<BookViewModel>(_mapper.ConfigurationProvider)
-                                      .ToListAsync();
-                                      
-            }
+            return await _db.Books.ProjectTo<BookViewModel>(_mapper.ConfigurationProvider)
+                                  .ToListAsync();
         }
     }
 }

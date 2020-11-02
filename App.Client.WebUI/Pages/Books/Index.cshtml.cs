@@ -19,7 +19,7 @@ namespace App.Client.WebUI.Pages.Books
 
         public async Task OnGet()
         {
-            BookViewModelList = await _mediatR.Send(new GetAllBooksQuery.Query());
+            BookViewModelList = await _mediatR.Send(new GetAllBooksQuery());
         }
     }
 }

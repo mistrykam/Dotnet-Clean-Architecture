@@ -18,7 +18,7 @@ namespace App.Client.WebUI.Pages.Books
 
         public async Task OnGet(int id)
         {
-            BookViewModel = await _mediatR.Send(new GetBookByIdQuery.Query() { Id = id });
+            BookViewModel = await _mediatR.Send(new GetBookByIdQuery() { Id = id });
         }
     }
 }
