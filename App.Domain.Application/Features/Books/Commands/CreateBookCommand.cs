@@ -16,11 +16,11 @@ namespace App.Domain.Application.Features.Books.Commands
         public DateTime? PublishedDate { get; set; }
     }
 
-    public class Handler : IRequestHandler<CreateBookCommand, int>
+    public class CreateBookHandler : IRequestHandler<CreateBookCommand, int>
     {
         private readonly IAppDataContext _db;
 
-        public Handler(IAppDataContext db)
+        public CreateBookHandler(IAppDataContext db)
         {
             _db = db;
         }
