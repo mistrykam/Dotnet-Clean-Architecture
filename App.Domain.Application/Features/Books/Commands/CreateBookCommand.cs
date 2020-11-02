@@ -7,38 +7,37 @@ using System.Threading.Tasks;
 
 namespace App.Domain.Application.Features.Books.Commands
 {
-    public class CreateBookCommand
+    public class CreateBookCommand : IRequest<int>
     {
-        public class Command : IRequest<int>
+        public string Title { get; set; }
+
+        public string Author { get; set; }
+
+        public DateTime? PublishedDate { get; set; }
+    }
+
+    public class Handler : IRequestHandler<CreateBookCommand, int>
+    {
+        private readonly IAppDataContext _db;
+
+        public Handler(IAppDataContext db)
         {
-            public string Title { get; set; }
-
-            public string Author { get; set; }
-
-            public DateTime? PublishedDate { get; set; }
+            _db = db;
         }
 
-        public class Handler : IRequestHandler<Command, int>
+        public async Task<int> Handle(CreateBookCommand request, CancellationToken cancellationToken)
         {
-            private readonly IAppDataContext _db;            
+            Book book = request.PublishedDate == null
+                                ? Book.CreateBook(request.Title, request.Author)
+                                : Book.CreateBook(request.Title, request.Author, ((DateTime)request.PublishedDate).Year, 
+                                                                                 ((DateTime)request.PublishedDate).Month, 
+                                                                                 ((DateTime)request.PublishedDate).Day);
 
-            public Handler(IAppDataContext db)
-            {
-                _db = db;
-            }
+            _db.Books.Add(book);
 
-            public async Task<int> Handle(Command request, CancellationToken cancellationToken)
-            {
-                var entity = request.PublishedDate == null 
-                                    ? Book.CreateBook(request.Title, request.Author) 
-                                    : Book.CreateBook(request.Title, request.Author, ((DateTime)request.PublishedDate).Year, ((DateTime)request.PublishedDate).Month, ((DateTime)request.PublishedDate).Day);
+            await _db.SaveChangesAsync(cancellationToken);
 
-                _db.Books.Add(entity);
-
-                await _db.SaveChangesAsync(cancellationToken);
-
-                return entity.BookId;
-            }
+            return book.BookId;
         }
     }
 }
