@@ -1,21 +1,22 @@
-﻿//using AutoMapper;
-//using AutoMapper.QueryableExtensions;
-
-using App.Domain.Application.Framework.Interfaces;
+﻿using App.Domain.Interfaces;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace App.Domain.Application.Features.Books
+namespace App.Domain.Application.Features.Books.Queries
 {
-    public class Details
+    public class GetBookByIdQuery
     {
+        /// <summary>
+        /// Query Parameters
+        /// </summary>
         public class Query : IRequest<BookViewModel>
         {
             public int? Id { get; set; }
@@ -29,6 +30,9 @@ namespace App.Domain.Application.Features.Books
             }
         }
 
+        /// <summary>
+        /// Return Book View Model
+        /// </summary>
         public class BookViewModel
         {
             public int BookId { get; set; }
@@ -47,18 +51,24 @@ namespace App.Domain.Application.Features.Books
             public int DislikeCount { get; set; }            
         }
 
+        /// <summary>
+        /// Handler the request
+        /// </summary>
         public class Handler :  IRequestHandler<Query, BookViewModel> 
         {
             private readonly IAppDataContext _db;
+            private readonly IMapper _mapper;
 
-            public Handler(IAppDataContext db)
+            public Handler(IAppDataContext db, IMapper _mapper)
             {
                 _db = db;
             }
 
             public async Task<BookViewModel> Handle(Query request, CancellationToken cancellationToken)
             {
-                var result = await _db.Books.Where(i => i.BookId == request.Id).SingleOrDefaultAsync();
+                var result = await _db.Books.Where(i => i.BookId == request.Id)
+                                      .ProjectTo<BookViewModel>(_mapper.ConfigurationProvider)
+                                      .SingleOrDefaultAsync();
 
                 if (result != null)
                 {

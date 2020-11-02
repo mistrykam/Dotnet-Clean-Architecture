@@ -24,8 +24,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\App.Domain.Application\App.Domain.Application.csproj" />
     <ProjectReference Include="..\App.Domain.Entities\App.Domain.Entities.csproj" />
+    <ProjectReference Include="..\App.Domain.Interfaces\App.Domain.Interfaces.csproj" />
   </ItemGroup>
 
 </Project>

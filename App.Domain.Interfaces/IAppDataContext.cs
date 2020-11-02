@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace App.Domain.Application.Framework.Interfaces
+namespace App.Domain.Interfaces
 {
     public interface IAppDataContext
     {

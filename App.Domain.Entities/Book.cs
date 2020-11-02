@@ -34,6 +34,15 @@ namespace App.Domain.Entities
             _reviews = new List<Review>();
         }
 
+        public static Book CreateBook(string title, string author)
+        {
+            return new Book()
+            {
+                Title = title,
+                Author = author,
+            };
+        }
+
         public static Book CreateBook(string title, string author, int year, int month, int day)
         {
             return new Book()
