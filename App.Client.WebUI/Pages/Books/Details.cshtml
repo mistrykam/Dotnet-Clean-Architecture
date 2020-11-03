@@ -18,17 +18,32 @@
         <div class="col-sm-4">@Model.BookViewModel.Author</div>
     </div>
     <div class="row">
-        <div class="col-sm-2"><label asp-for="BookViewModel.DislikeCount" class="control-label"></label></div>
-        <div class="col-sm-4">@Model.BookViewModel.DislikeCount</div>
-    </div>
-    <div class="row">
         <div class="col-sm-2"><label asp-for="BookViewModel.LikeCount" class="control-label"></label></div>
         <div class="col-sm-4">@Model.BookViewModel.LikeCount</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2"><label asp-for="BookViewModel.DislikeCount" class="control-label"></label></div>
+        <div class="col-sm-4">@Model.BookViewModel.DislikeCount</div>
     </div>
     <div class="row">
         <div class="col-sm-2"><label asp-for="BookViewModel.PublishedDate" class="control-label"></label></div>
         <div class="col-sm-4">@Model.BookViewModel.PublishedDate</div>
     </div>
+    <div class="row">
+        <div class="col-sm-1">
+            <form asp-page-handler="Liked" method="post">
+                <input id="bookId" name="bookId" type="hidden" value="@Model.BookViewModel.BookId" />
+                <button class="btn btn-success">Like</button>
+            </form>
+        </div>
+        <div class="col-sm-1">
+            <form asp-page-handler="Disliked" method="post">
+                <input id="bookId" name="bookId" type="hidden" value="@Model.BookViewModel.BookId" />
+                <button class="btn btn-danger">Dislike</button>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col"><a asp-page="/Books/Index">List Books</a></div>        
+    </div>
 </div>
-
-<div><a asp-page="/Books/Index">List Books</a></div>

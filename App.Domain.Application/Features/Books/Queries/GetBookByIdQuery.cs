@@ -15,14 +15,14 @@ namespace App.Domain.Application.Features.Books.Queries
     /// </summary>
     public class GetBookByIdQuery : IRequest<BookViewModel>
     {
-        public int? Id { get; set; }
+        public int? BookId { get; set; }
     }
 
     public class Validator : AbstractValidator<GetBookByIdQuery>
     {
         public Validator()
         {
-            RuleFor(m => m.Id).NotNull();
+            RuleFor(m => m.BookId).NotNull();
         }
     }
 
@@ -42,7 +42,7 @@ namespace App.Domain.Application.Features.Books.Queries
 
         public async Task<BookViewModel> Handle(GetBookByIdQuery request, CancellationToken cancellationToken)
         {
-            return await _db.Books.Where(i => i.BookId == request.Id)
+            return await _db.Books.Where(i => i.BookId == request.BookId)
                                   .ProjectTo<BookViewModel>(_mapper.ConfigurationProvider)
                                   .SingleOrDefaultAsync();
         }
