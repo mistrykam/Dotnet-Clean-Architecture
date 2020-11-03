@@ -1,15 +1,16 @@
 ﻿using App.Domain.Application.Features.Books.Commands;
-using App.Domain.Application.Features.Books.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Threading.Tasks;
 
-
 namespace App.Client.WebUI.Pages.Books
 {
     public class CreateModel : PageModel
     {
+        [BindProperty]
+        public CreateBookCommand Book { get; set; }
+
         private readonly IMediator _mediatR;
 
         public CreateModel(IMediator mediatR)
@@ -21,9 +22,6 @@ namespace App.Client.WebUI.Pages.Books
         {
             return Page();
         }
-
-        [BindProperty]
-        public CreateBookCommand Book { get; set; }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
