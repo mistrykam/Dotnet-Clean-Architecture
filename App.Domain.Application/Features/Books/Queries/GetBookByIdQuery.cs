@@ -18,9 +18,9 @@ namespace App.Domain.Application.Features.Books.Queries
         public int? BookId { get; set; }
     }
 
-    public class Validator : AbstractValidator<GetBookByIdQuery>
+    public class GetBookByIdValidator : AbstractValidator<GetBookByIdQuery>
     {
-        public Validator()
+        public GetBookByIdValidator()
         {
             RuleFor(m => m.BookId).NotNull();
         }

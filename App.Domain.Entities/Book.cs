@@ -25,8 +25,7 @@ namespace App.Domain.Entities
 
         public int DislikeCount { get; private set; }
 
-        [Required]
-        [MaxLength(256)]
+        [Required]        
         public IEnumerable<Review> Reviews { get => _reviews; private set => _reviews = (List<Review>)value; }
 
         private Book()
@@ -40,6 +39,8 @@ namespace App.Domain.Entities
             {
                 Title = title,
                 Author = author,
+                LikeCount = 0,
+                DislikeCount = 0
             };
         }
 
@@ -49,7 +50,9 @@ namespace App.Domain.Entities
             {
                 Title = title,
                 Author = author,
-                PublishedDate = new DateTime(year, month, day)
+                PublishedDate = new DateTime(year, month, day),
+                LikeCount = 0,
+                DislikeCount = 0
             };
         }
 

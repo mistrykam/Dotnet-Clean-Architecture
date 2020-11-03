@@ -1,7 +1,9 @@
 ﻿using App.Domain.Entities;
 using App.Domain.Interfaces;
+using FluentValidation;
 using MediatR;
 using System;
+using System.ComponentModel;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -13,8 +15,19 @@ namespace App.Domain.Application.Features.Books.Commands
 
         public string Author { get; set; }
 
+        [DisplayName("Published Date")]
         public DateTime? PublishedDate { get; set; }
     }
+
+    public class CreateBookValidator : AbstractValidator<CreateBookCommand>
+    {
+        public CreateBookValidator()
+        {
+            RuleFor(m => m.Title).NotNull().MaximumLength(256);
+            RuleFor(m => m.Author).NotNull().MaximumLength(256);
+        }
+    }
+
 
     public class CreateBookHandler : IRequestHandler<CreateBookCommand, int>
     {
