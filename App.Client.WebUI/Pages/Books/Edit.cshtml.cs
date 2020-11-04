@@ -12,7 +12,7 @@ namespace App.Client.WebUI.Pages.Books
         private readonly IMediator _mediatR;
 
         [BindProperty]
-        public BookViewModel BookViewModel { get; set; }
+        public UpdateBookCommand UpdateBookCommand { get; set; }
 
         public EditModel(IMediator mediatR)
         {
@@ -21,7 +21,15 @@ namespace App.Client.WebUI.Pages.Books
 
         public async Task OnGet(int bookId)
         {
-            BookViewModel = await _mediatR.Send(new GetBookByIdQuery() { BookId = bookId });
+            BookViewModel BookViewModel = await _mediatR.Send(new GetBookByIdQuery() { BookId = bookId });
+
+            UpdateBookCommand = new UpdateBookCommand()
+                                {
+                                    BookId = BookViewModel.BookId,
+                                    Title = BookViewModel.Title,
+                                    Author = BookViewModel.Author,
+                                    PublishedDate = BookViewModel.PublishedDate
+                                };
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -31,13 +39,7 @@ namespace App.Client.WebUI.Pages.Books
                 return Page();
             }
 
-            await _mediatR.Send(new UpdateBookCommand()
-                                {
-                                    BookId = BookViewModel.BookId,
-                                    Title = BookViewModel.Title,
-                                    Author = BookViewModel.Author,
-                                    PublishedDate = BookViewModel.PublishedDate
-                                });
+            await _mediatR.Send(UpdateBookCommand);
 
             return RedirectToPage("./Index");
         }
