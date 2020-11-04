@@ -9,7 +9,7 @@ namespace Test.App.Domain.Entities
         [Fact]
         public void Test_CreateBook()
         {
-            Book book = Book.CreateBook("Four Hour Work Week", "Tim Ferris", 2001, 10, 12);
+            Book book = Book.CreateBook("Four Hour Work Week", "Tim Ferris", new DateTime(2001, 10, 12));
 
             book.Like();
             book.Like();

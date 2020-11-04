@@ -14,7 +14,7 @@ namespace Test.App.Infrastructure.DataAccess
         {
             using (AppDataContext dbContext = new AppDataContext(GetConnectionDetails()))
             {
-                Book book = Book.CreateBook("Four Hour Work Week", "Tim Ferris", 2001, 10, 12);
+                Book book = Book.CreateBook("Four Hour Work Week", "Tim Ferris", new DateTime(2001, 10, 12));
 
                 book.Like();
                 book.Like();

@@ -28,7 +28,6 @@ namespace App.Domain.Application.Features.Books.Commands
         }
     }
 
-
     public class CreateBookHandler : IRequestHandler<CreateBookCommand, int>
     {
         private readonly IAppDataContext _db;
@@ -40,11 +39,7 @@ namespace App.Domain.Application.Features.Books.Commands
 
         public async Task<int> Handle(CreateBookCommand request, CancellationToken cancellationToken)
         {
-            Book book = request.PublishedDate == null
-                                ? Book.CreateBook(request.Title, request.Author)
-                                : Book.CreateBook(request.Title, request.Author, ((DateTime)request.PublishedDate).Year, 
-                                                                                 ((DateTime)request.PublishedDate).Month, 
-                                                                                 ((DateTime)request.PublishedDate).Day);
+            Book book = Book.CreateBook(request.Title, request.Author, request.PublishedDate);
 
             _db.Books.Add(book);
 

@@ -7,6 +7,7 @@ namespace App.Domain.Entities
     public class Book : IValidatableObject
     {
         private List<Review> _reviews;
+        private DateTime? _publishedDate;
 
         [Key]
         public int BookId { get; private set; }
@@ -19,13 +20,24 @@ namespace App.Domain.Entities
         [MaxLength(256)]
         public string Author { get; private set; }
 
-        public DateTime? PublishedDate { get; private set; }
+        public DateTime? PublishedDate
+        {
+            get => _publishedDate;
+
+            private set
+            {
+                if (value != null)
+                    _publishedDate = ((DateTime)value).Date;
+                else
+                    _publishedDate = null;
+            }
+        }
 
         public int LikeCount { get; private set; }
 
         public int DislikeCount { get; private set; }
 
-        [Required]        
+        [Required]
         public IEnumerable<Review> Reviews { get => _reviews; private set => _reviews = (List<Review>)value; }
 
         private Book()
@@ -33,27 +45,23 @@ namespace App.Domain.Entities
             _reviews = new List<Review>();
         }
 
-        public static Book CreateBook(string title, string author)
+        public static Book CreateBook(string title, string author, DateTime? publishedDate)
         {
             return new Book()
             {
                 Title = title,
                 Author = author,
+                PublishedDate = publishedDate,
                 LikeCount = 0,
                 DislikeCount = 0
             };
         }
 
-        public static Book CreateBook(string title, string author, int year, int month, int day)
+        public void Update(string title, string author, DateTime? publishedDate)
         {
-            return new Book()
-            {
-                Title = title,
-                Author = author,
-                PublishedDate = new DateTime(year, month, day),
-                LikeCount = 0,
-                DislikeCount = 0
-            };
+            Title = title;
+            Author = author;
+            PublishedDate = publishedDate;
         }
 
         public void Like()
