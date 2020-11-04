@@ -2,16 +2,15 @@
 @model App.Client.WebUI.Pages.Books.EditModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Book";
 }
 
-<h1>Edit</h1>
-
-<h4>Book</h4>
+<h4>Edit Book</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
+<form method="post">
+    <div class="row">
+        <div class="col-md-4">
+
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="BookViewModel.BookId" />
             <div class="form-group">
@@ -29,12 +28,13 @@
                 <input asp-for="BookViewModel.PublishedDate" class="form-control" />
                 <span asp-validation-for="BookViewModel.PublishedDate" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
-</div>
+    <hr />
+    <div class="form-group">
+        <input type="submit" value="Save" class="btn btn-primary" />
+    </div>
+</form>
 
 <div>
     <a asp-page="./Index">Back to List</a>
