@@ -28,20 +28,20 @@
 </div>
 <hr/>
 <div class="row mt-3">
-    <div class="col-sm-1">
-        <a class="btn btn-info" asp-page="Edit" asp-route-bookid="@Model.BookViewModel.BookId">Edit</a>
-    </div>
-    <div class="col-sm-1">
+    <div class="col-sm-2">
         <form asp-page-handler="Liked" method="post">
             <input id="bookId" name="bookId" type="hidden" value="@Model.BookViewModel.BookId" />
-            <button class="btn btn-success">Like</button>
+            <button class="btn btn-block btn-success">Like</button>
         </form>
     </div>
-    <div class="col-sm-1">
+    <div class="col-sm-2">
         <form asp-page-handler="Disliked" method="post">
             <input id="bookId" name="bookId" type="hidden" value="@Model.BookViewModel.BookId" />
-            <button class="btn btn-danger">Dislike</button>
+            <button class="btn btn-block btn-danger">Dislike</button>
         </form>
+    </div>
+    <div class="col-sm-2">
+        <a class="btn btn-block btn-info" asp-page="Edit" asp-route-bookid="@Model.BookViewModel.BookId">Edit</a>
     </div>
 </div>
 <div class="row mt-3">
