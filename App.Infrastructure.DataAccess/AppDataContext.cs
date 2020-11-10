@@ -3,6 +3,8 @@ using App.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
+using App.Domain.Entities.Enum;
+using App.Domain.Entities.Framework;
 
 namespace App.Infrastructure.DataAccess
 {
@@ -10,6 +12,7 @@ namespace App.Infrastructure.DataAccess
     {
         public DbSet<Book> Books { get; set; }
         public DbSet<Review> Reviews { get; set; }
+        public DbSet<BookFormatType> BookFormats { get; set; }
 
         public AppDataContext(DbContextOptions options) : base(options)
         {
@@ -19,13 +22,16 @@ namespace App.Infrastructure.DataAccess
         {
             base.OnModelCreating(modelBuilder);
 
-            /*
-            modelBuilder.Entity<Category>().HasData(
-                new Category() { CategoryId = 9, CategoryName = "Toys" });
+            // BookFormatType Enum mapping
+            modelBuilder.Entity<BookFormatType>().HasKey(x => x.Value);
+            modelBuilder.Entity<BookFormatType>().Property(x => x.Value).HasDefaultValue(1).ValueGeneratedNever().IsRequired();
+            modelBuilder.Entity<BookFormatType>().Property(x => x.DisplayName).IsRequired();
 
-            modelBuilder.Entity<Product>().HasData(
-                new Product() { ProductId = 6, ProductName = "Under Runner", UnitPrice = 59.95M, Discontinued = false, CategoryId = 1 });
-            */
+            // Seed BookFormatType
+            modelBuilder.Entity<BookFormatType>().HasData(
+                BookFormatType.Book,
+                BookFormatType.AudioBook,
+                BookFormatType.EBook);
         }
     }
 
