@@ -1,4 +1,5 @@
-﻿using System;
+﻿using App.Domain.Entities.Enum;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -19,6 +20,8 @@ namespace App.Domain.Entities
         [Required]
         [MaxLength(256)]
         public string Author { get; private set; }
+
+        public BookFormatType BookFormat { get; private set; }
 
         public DateTime? PublishedDate
         {
@@ -45,23 +48,25 @@ namespace App.Domain.Entities
             _reviews = new List<Review>();
         }
 
-        public static Book CreateBook(string title, string author, DateTime? publishedDate = null)
+        public static Book CreateBook(string title, string author, DateTime? publishedDate = null, BookFormatType bookFormat = null)
         {
             return new Book()
             {
                 Title = title,
                 Author = author,
                 PublishedDate = publishedDate,
+                BookFormat = bookFormat,
                 LikeCount = 0,
                 DislikeCount = 0
             };
         }
 
-        public void Update(string title, string author, DateTime? publishedDate)
+        public void Update(string title, string author, DateTime? publishedDate = null, BookFormatType bookFormat = null)
         {
             Title = title;
             Author = author;
             PublishedDate = publishedDate;
+            BookFormat = bookFormat;
         }
 
         public void Like()
