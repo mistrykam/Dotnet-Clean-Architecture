@@ -7,48 +7,28 @@ namespace App.Domain.Entities.Framework
 {
     public abstract class Enumeration : IComparable
     {
-        // See: https://lostechies.com/jimmybogard/2008/08/12/enumeration-classes/
-        private readonly int _value;
-        private readonly string _displayName;
-
         protected Enumeration() {}
 
         protected Enumeration(int value, string displayName)
         {
-            _value = value;
-            _displayName = displayName;
+            Value = value;
+            DisplayName = displayName;
         }
 
-        public int Value
-        {
-            get { return _value; }
-        }
+        public int Value { get; }
 
-        public string DisplayName
-        {
-            get { return _displayName; }
-        }
+        public string DisplayName { get; }
 
         public override string ToString()
         {
             return DisplayName;
         }
 
-        public static IEnumerable<T> GetAll<T>() where T : Enumeration, new()
+        public static IEnumerable<T> GetAll<T>() where T : Enumeration
         {
-            var type = typeof(T);
-            var fields = type.GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly);
+            var fields = typeof(T).GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly);
 
-            foreach (var info in fields)
-            {
-                var instance = new T();
-                var locatedValue = info.GetValue(instance) as T;
-
-                if (locatedValue != null)
-                {
-                    yield return locatedValue;
-                }
-            }
+            return fields.Select(f => f.GetValue(null)).Cast<T>();
         }
 
         public override bool Equals(object obj)
@@ -61,14 +41,14 @@ namespace App.Domain.Entities.Framework
             }
 
             var typeMatches = GetType().Equals(obj.GetType());
-            var valueMatches = _value.Equals(otherValue.Value);
+            var valueMatches = Value.Equals(otherValue.Value);
 
             return typeMatches && valueMatches;
         }
 
         public override int GetHashCode()
         {
-            return _value.GetHashCode();
+            return Value.GetHashCode();
         }
 
         public static int AbsoluteDifference(Enumeration firstValue, Enumeration secondValue)

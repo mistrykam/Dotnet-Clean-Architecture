@@ -1,4 +1,5 @@
 ﻿using App.Domain.Entities;
+using App.Domain.Entities.Enum;
 using App.Domain.Interfaces;
 using FluentValidation;
 using MediatR;
@@ -14,6 +15,8 @@ namespace App.Domain.Application.Features.Books.Commands
         public string Title { get; set; }
 
         public string Author { get; set; }
+
+        public BookFormatType BookFormat { get; set; }
 
         [DisplayName("Published Date")]
         public DateTime? PublishedDate { get; set; }
@@ -39,7 +42,7 @@ namespace App.Domain.Application.Features.Books.Commands
 
         public async Task<int> Handle(CreateBookCommand request, CancellationToken cancellationToken)
         {
-            Book book = Book.CreateBook(request.Title, request.Author, request.PublishedDate);
+            Book book = Book.CreateBook(request.Title, request.Author, request.PublishedDate, request.BookFormat);
 
             _db.Books.Add(book);
 

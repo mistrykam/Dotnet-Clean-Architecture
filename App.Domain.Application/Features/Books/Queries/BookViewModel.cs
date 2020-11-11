@@ -1,4 +1,5 @@
-﻿using System;
+﻿using App.Domain.Entities.Enum;
+using System;
 using System.ComponentModel;
 
 namespace App.Domain.Application.Features.Books.Queries
@@ -13,6 +14,8 @@ namespace App.Domain.Application.Features.Books.Queries
         public string Title { get; set; }
 
         public string Author { get; set; }
+
+        public BookFormatType BookFormat {get; set;}
 
         [DisplayName("Published Date")]
         public DateTime? PublishedDate { get; set; }
