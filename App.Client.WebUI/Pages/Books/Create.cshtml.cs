@@ -1,11 +1,13 @@
 ﻿using App.Domain.Application.Features.Books.Commands;
 using App.Domain.Entities.Enum;
 using App.Domain.Entities.Framework;
+using App.Infrastructure.DataAccess.Migrations;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace App.Client.WebUI.Pages.Books
@@ -15,7 +17,7 @@ namespace App.Client.WebUI.Pages.Books
         [BindProperty]
         public CreateBookCommand Book { get; set; }
 
-        public SelectList BookFormatOptions { get; set; }
+        public IEnumerable<SelectListItem> BookFormatOptions { get; set; }
 
         private readonly IMediator _mediatR;
 
@@ -28,7 +30,9 @@ namespace App.Client.WebUI.Pages.Books
         {
             IEnumerable<BookFormatType> list = Enumeration.GetAll<BookFormatType>();
 
-            BookFormatOptions = new SelectList(list, nameof(BookFormatType.Value), nameof(BookFormatType.DisplayName));
+            BookFormatOptions = list.Select(item => new SelectListItem() { Value = nameof(item), Text = item.DisplayName });
+
+            // BookFormatOptions = new SelectList(list, nameof(BookFormatType), nameof(BookFormatType.DisplayName));
         }
 
         public IActionResult OnGet()
@@ -45,6 +49,8 @@ namespace App.Client.WebUI.Pages.Books
             {
                 return Page();
             }
+
+            Book.BookFormat = BookFormatType.Book;
 
             await _mediatR.Send(Book);
 
