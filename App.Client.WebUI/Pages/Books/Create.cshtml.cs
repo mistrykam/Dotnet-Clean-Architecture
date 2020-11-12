@@ -4,9 +4,7 @@ using App.Domain.Entities.Framework;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace App.Client.WebUI.Pages.Books
@@ -16,7 +14,7 @@ namespace App.Client.WebUI.Pages.Books
         [BindProperty]
         public CreateBookCommand Book { get; set; }
 
-        public IEnumerable<SelectListItem> BookFormatOptions { get; set; }
+        public IEnumerable<BookFormatType> BookFormatOptions { get; set; }
 
         private readonly IMediator _mediatR;
 
@@ -27,11 +25,7 @@ namespace App.Client.WebUI.Pages.Books
 
         public void PopulationOptions()
         {
-            IEnumerable<BookFormatType> list = Enumeration.GetAll<BookFormatType>();
-
-            BookFormatOptions = list.Select(item => new SelectListItem() { Value = nameof(item), Text = item.DisplayName });
-
-            // BookFormatOptions = new SelectList(list, nameof(BookFormatType), nameof(BookFormatType.DisplayName));
+            BookFormatOptions = Enumeration.GetAll<BookFormatType>();
         }
 
         public IActionResult OnGet()
