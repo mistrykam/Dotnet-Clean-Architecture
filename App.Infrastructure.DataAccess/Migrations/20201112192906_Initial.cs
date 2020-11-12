@@ -8,6 +8,18 @@ namespace App.Infrastructure.DataAccess.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "BookFormats",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false, defaultValue: 1),
+                    DisplayName = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BookFormats", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Books",
                 columns: table => new
                 {
@@ -15,6 +27,7 @@ namespace App.Infrastructure.DataAccess.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(maxLength: 256, nullable: false),
                     Author = table.Column<string>(maxLength: 256, nullable: false),
+                    BookFormatId = table.Column<int>(nullable: true),
                     PublishedDate = table.Column<DateTime>(nullable: true),
                     LikeCount = table.Column<int>(nullable: false),
                     DislikeCount = table.Column<int>(nullable: false)
@@ -22,6 +35,12 @@ namespace App.Infrastructure.DataAccess.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Books", x => x.BookId);
+                    table.ForeignKey(
+                        name: "FK_Books_BookFormats_BookFormatId",
+                        column: x => x.BookFormatId,
+                        principalTable: "BookFormats",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -47,6 +66,26 @@ namespace App.Infrastructure.DataAccess.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.InsertData(
+                table: "BookFormats",
+                columns: new[] { "Id", "DisplayName" },
+                values: new object[] { 0, "Book" });
+
+            migrationBuilder.InsertData(
+                table: "BookFormats",
+                columns: new[] { "Id", "DisplayName" },
+                values: new object[] { 1, "AudioBook" });
+
+            migrationBuilder.InsertData(
+                table: "BookFormats",
+                columns: new[] { "Id", "DisplayName" },
+                values: new object[] { 2, "eBook" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Books_BookFormatId",
+                table: "Books",
+                column: "BookFormatId");
+
             migrationBuilder.CreateIndex(
                 name: "IX_Reviews_BookId",
                 table: "Reviews",
@@ -60,6 +99,9 @@ namespace App.Infrastructure.DataAccess.Migrations
 
             migrationBuilder.DropTable(
                 name: "Books");
+
+            migrationBuilder.DropTable(
+                name: "BookFormats");
         }
     }
 }

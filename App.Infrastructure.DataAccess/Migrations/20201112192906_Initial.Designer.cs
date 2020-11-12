@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App.Infrastructure.DataAccess.Migrations
 {
     [DbContext(typeof(AppDataContext))]
-    [Migration("20201110153509_BookFormat")]
-    partial class BookFormat
+    [Migration("20201112192906_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -33,7 +33,7 @@ namespace App.Infrastructure.DataAccess.Migrations
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
 
-                    b.Property<int?>("BookFormatValue")
+                    b.Property<int?>("BookFormatId")
                         .HasColumnType("int");
 
                     b.Property<int>("DislikeCount")
@@ -52,14 +52,14 @@ namespace App.Infrastructure.DataAccess.Migrations
 
                     b.HasKey("BookId");
 
-                    b.HasIndex("BookFormatValue");
+                    b.HasIndex("BookFormatId");
 
                     b.ToTable("Books");
                 });
 
             modelBuilder.Entity("App.Domain.Entities.Enum.BookFormatType", b =>
                 {
-                    b.Property<int>("Value")
+                    b.Property<int>("Id")
                         .HasColumnType("int")
                         .HasDefaultValue(1);
 
@@ -67,24 +67,24 @@ namespace App.Infrastructure.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Value");
+                    b.HasKey("Id");
 
                     b.ToTable("BookFormats");
 
                     b.HasData(
                         new
                         {
-                            Value = 0,
+                            Id = 0,
                             DisplayName = "Book"
                         },
                         new
                         {
-                            Value = 1,
+                            Id = 1,
                             DisplayName = "AudioBook"
                         },
                         new
                         {
-                            Value = 2,
+                            Id = 2,
                             DisplayName = "eBook"
                         });
                 });
@@ -126,7 +126,7 @@ namespace App.Infrastructure.DataAccess.Migrations
                 {
                     b.HasOne("App.Domain.Entities.Enum.BookFormatType", "BookFormat")
                         .WithMany()
-                        .HasForeignKey("BookFormatValue");
+                        .HasForeignKey("BookFormatId");
                 });
 
             modelBuilder.Entity("App.Domain.Entities.Review", b =>
