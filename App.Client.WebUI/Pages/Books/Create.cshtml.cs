@@ -1,7 +1,6 @@
 ﻿using App.Domain.Application.Features.Books.Commands;
 using App.Domain.Entities.Enum;
 using App.Domain.Entities.Framework;
-using App.Infrastructure.DataAccess.Migrations;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;

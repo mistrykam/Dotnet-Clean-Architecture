@@ -12,6 +12,6 @@ namespace App.Domain.Entities.Enum
         public static readonly BookFormatType EBook = new BookFormatType(2, "eBook");
 
         private BookFormatType() { }
-        private BookFormatType(int value, string displayName) : base(value, displayName) { }
+        private BookFormatType(int id, string displayName) : base(id, displayName) { }
     }
 }

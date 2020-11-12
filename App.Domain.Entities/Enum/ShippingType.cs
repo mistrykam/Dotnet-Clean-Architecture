@@ -9,7 +9,7 @@ namespace App.Domain.Entities.Enum
         public static readonly ShippingType OvernightMail = new OvernighMailType();
 
         protected ShippingType() { }
-        protected ShippingType(int value, string displayName) : base(value, displayName) { }
+        protected ShippingType(int id, string displayName) : base(id, displayName) { }
 
         public abstract decimal ShippingCost { get; }
 

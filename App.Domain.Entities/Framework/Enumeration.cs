@@ -9,13 +9,13 @@ namespace App.Domain.Entities.Framework
     {
         protected Enumeration() {}
 
-        protected Enumeration(int value, string displayName)
+        protected Enumeration(int id, string displayName)
         {
-            Value = value;
+            Id = id;
             DisplayName = displayName;
         }
 
-        public int Value { get; }
+        public int Id { get; }
 
         public string DisplayName { get; }
 
@@ -41,25 +41,25 @@ namespace App.Domain.Entities.Framework
             }
 
             var typeMatches = GetType().Equals(obj.GetType());
-            var valueMatches = Value.Equals(otherValue.Value);
+            var valueMatches = Id.Equals(otherValue.Id);
 
             return typeMatches && valueMatches;
         }
 
         public override int GetHashCode()
         {
-            return Value.GetHashCode();
+            return Id.GetHashCode();
         }
 
         public static int AbsoluteDifference(Enumeration firstValue, Enumeration secondValue)
         {
-            var absoluteDifference = Math.Abs(firstValue.Value - secondValue.Value);
+            var absoluteDifference = Math.Abs(firstValue.Id - secondValue.Id);
             return absoluteDifference;
         }
 
         public static T FromValue<T>(int value) where T : Enumeration, new()
         {
-            var matchingItem = parse<T, int>(value, "value", item => item.Value == value);
+            var matchingItem = parse<T, int>(value, "value", item => item.Id == value);
             return matchingItem;
         }
 
@@ -84,7 +84,7 @@ namespace App.Domain.Entities.Framework
 
         public int CompareTo(object other)
         {
-            return Value.CompareTo(((Enumeration)other).Value);
+            return Id.CompareTo(((Enumeration)other).Id);
         }
     }
 }
