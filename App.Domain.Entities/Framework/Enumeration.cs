@@ -24,11 +24,24 @@ namespace App.Domain.Entities.Framework
             return DisplayName;
         }
 
-        public static IEnumerable<T> GetAll<T>() where T : Enumeration
+        /// <summary>
+        /// Key is the full name
+        /// Value contains the Enum (Id, DisplayName)
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public static IReadOnlyDictionary<string, T> GetAll<T>() where T : Enumeration
         {
             var fields = typeof(T).GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly);
 
-            return fields.Select(f => f.GetValue(null)).Cast<T>();
+            var list = new Dictionary<string, T>();
+
+            foreach (var item in fields)
+            {
+                list.Add(typeof(T).FullName + "." + item.Name, (T)item.GetValue(null));
+            }
+
+            return list;
         }
 
         public override bool Equals(object obj)
@@ -69,9 +82,16 @@ namespace App.Domain.Entities.Framework
             return matchingItem;
         }
 
+        private static IEnumerable<T> FindAll<T>() where T : Enumeration
+        {
+            var fields = typeof(T).GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly);
+
+            return fields.Select(f => f.GetValue(null)).Cast<T>();
+        }
+
         private static T parse<T, K>(K value, string description, Func<T, bool> predicate) where T : Enumeration, new()
         {
-            var matchingItem = GetAll<T>().FirstOrDefault(predicate);
+            var matchingItem = FindAll<T>().FirstOrDefault(predicate);
 
             if (matchingItem == null)
             {

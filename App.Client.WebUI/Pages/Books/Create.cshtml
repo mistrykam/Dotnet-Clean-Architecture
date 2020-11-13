@@ -25,9 +25,9 @@
                 <label asp-for="Book.BookFormat" class="control-label"></label>
                 <select asp-for="Book.BookFormat" class="form-control">
                     <option value="">-- Select --</option>
-                    @foreach (App.Domain.Entities.Enum.BookFormatType item in Model.BookFormatOptions)
+                    @foreach (var item in Model.BookFormatOptions)
                     {
-                        <option value="@item.GetType().FullName">@item.DisplayName</option>
+                        <option value="@item.Key">@item.Value.DisplayName</option>
                     }
                 </select>
                 <span asp-validation-for="Book.BookFormat" class="text-danger"></span>

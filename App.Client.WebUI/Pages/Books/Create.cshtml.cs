@@ -14,7 +14,7 @@ namespace App.Client.WebUI.Pages.Books
         [BindProperty]
         public CreateBookCommand Book { get; set; }
 
-        public IEnumerable<BookFormatType> BookFormatOptions { get; set; }
+        public IReadOnlyDictionary<string, BookFormatType> BookFormatOptions { get; set; }
 
         private readonly IMediator _mediatR;
 
