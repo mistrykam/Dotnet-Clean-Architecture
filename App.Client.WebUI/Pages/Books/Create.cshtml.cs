@@ -14,7 +14,7 @@ namespace App.Client.WebUI.Pages.Books
         [BindProperty]
         public CreateBookCommand Book { get; set; }
 
-        public IReadOnlyDictionary<string, BookFormatType> BookFormatOptions { get; set; }
+        public IEnumerable<BookFormatType> BookFormatOptions { get; set; }
 
         private readonly IMediator _mediatR;
 
@@ -25,7 +25,7 @@ namespace App.Client.WebUI.Pages.Books
 
         public void PopulationOptions()
         {
-            BookFormatOptions = Enumeration.GetAll<BookFormatType>();
+            BookFormatOptions = Enumeration.FindAll<BookFormatType>();
         }
 
         public IActionResult OnGet()
@@ -42,6 +42,8 @@ namespace App.Client.WebUI.Pages.Books
             {
                 return Page();
             }
+
+            Book.BookFormat = 0;
 
             await _mediatR.Send(Book);
 

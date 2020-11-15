@@ -82,7 +82,7 @@ namespace App.Domain.Entities.Framework
             return matchingItem;
         }
 
-        private static IEnumerable<T> FindAll<T>() where T : Enumeration
+        public static IEnumerable<T> FindAll<T>() where T : Enumeration
         {
             var fields = typeof(T).GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly);
 

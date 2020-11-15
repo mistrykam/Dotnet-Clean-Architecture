@@ -27,7 +27,7 @@
                     <option value="">-- Select --</option>
                     @foreach (var item in Model.BookFormatOptions)
                     {
-                        <option value="@item.Key">@item.Value.DisplayName</option>
+                        <option value="@item.Id">@item.DisplayName</option>
                     }
                 </select>
                 <span asp-validation-for="Book.BookFormat" class="text-danger"></span>
