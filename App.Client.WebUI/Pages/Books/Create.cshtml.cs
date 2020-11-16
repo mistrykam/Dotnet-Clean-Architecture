@@ -43,8 +43,6 @@ namespace App.Client.WebUI.Pages.Books
                 return Page();
             }
 
-            Book.BookFormat = 0;
-
             await _mediatR.Send(Book);
 
             return RedirectToPage("./Index");
