@@ -17,7 +17,7 @@ namespace App.Domain.Entities.Enum
         {
         }
 
-        private static BookFormatType FromInt(int? id)
+        public static BookFormatType FromInt(int? id)
         {
             var list = Enumeration.FindAll<BookFormatType>();
 

@@ -1,8 +1,8 @@
+using App.Client.WebUI.Framework;
 using App.Domain.Application;
 using App.Domain.Interfaces;
 using App.Infrastructure.DataAccess;
 using FluentValidation.AspNetCore;
-using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -32,6 +32,10 @@ namespace App.Client.WebUI
             services.AddScoped<IAppDataContext>(provider => provider.GetService<AppDataContext>());
 
             services.AddRazorPages()
+                    .AddMvcOptions(options =>
+                     {
+                         options.ModelBinderProviders.Insert(0, new BookFormatTypeBinderProvider());                         
+                     })
                     .AddFluentValidation(p =>
                      {
                          p.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly());
