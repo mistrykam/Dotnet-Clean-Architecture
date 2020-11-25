@@ -22,6 +22,12 @@ namespace App.Infrastructure.DataAccess
         {
             base.OnModelCreating(modelBuilder);
 
+            /*
+            modelBuilder.Entity<Book>()
+                .OwnsOne(x => x.BookFormat)
+                .Property(x => x.Value);
+            */
+                   
             // BookFormatType Enum mapping
             modelBuilder.Entity<BookFormatType>().HasKey(x => x.Value  );
             modelBuilder.Entity<BookFormatType>().Property(x => x.Value).HasDefaultValue(1).ValueGeneratedNever().IsRequired();
@@ -32,6 +38,7 @@ namespace App.Infrastructure.DataAccess
                 BookFormatType.Book,
                 BookFormatType.AudioBook,
                 BookFormatType.EBook);
+        
         }
     }
 
