@@ -1,4 +1,5 @@
 ﻿using App.Domain.Entities.Enum;
+using App.Domain.Entities.Framework;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 using System;
@@ -40,7 +41,7 @@ namespace App.Client.WebUI.Framework
             if (string.IsNullOrEmpty(value))
                 return Task.CompletedTask;
 
-            if (!int.TryParse(value, out int id) && BookFormatType.FromInt(id) != null)
+            if (!int.TryParse(value, out int id) && Enumeration.FromValue<BookFormatType>(id) != null)
             {
                 bindingContext.ModelState.TryAddModelError(modelName, $"{nameof(BookFormatType)} Id must be an integer.");
 
@@ -48,7 +49,7 @@ namespace App.Client.WebUI.Framework
             }
 
             // convert the id to the correct result
-            bindingContext.Result = ModelBindingResult.Success(BookFormatType.FromInt(id));
+            bindingContext.Result = ModelBindingResult.Success(Enumeration.FromValue<BookFormatType>(id));
 
             return Task.CompletedTask;
         }
