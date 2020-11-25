@@ -11,12 +11,12 @@ namespace App.Infrastructure.DataAccess.Migrations
                 name: "BookFormats",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false, defaultValue: 1),
+                    Value = table.Column<int>(nullable: false, defaultValue: 1),
                     DisplayName = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BookFormats", x => x.Id);
+                    table.PrimaryKey("PK_BookFormats", x => x.Value);
                 });
 
             migrationBuilder.CreateTable(
@@ -27,7 +27,7 @@ namespace App.Infrastructure.DataAccess.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(maxLength: 256, nullable: false),
                     Author = table.Column<string>(maxLength: 256, nullable: false),
-                    BookFormatId = table.Column<int>(nullable: true),
+                    BookFormatValue = table.Column<int>(nullable: true),
                     PublishedDate = table.Column<DateTime>(nullable: true),
                     LikeCount = table.Column<int>(nullable: false),
                     DislikeCount = table.Column<int>(nullable: false)
@@ -36,10 +36,10 @@ namespace App.Infrastructure.DataAccess.Migrations
                 {
                     table.PrimaryKey("PK_Books", x => x.BookId);
                     table.ForeignKey(
-                        name: "FK_Books_BookFormats_BookFormatId",
-                        column: x => x.BookFormatId,
+                        name: "FK_Books_BookFormats_BookFormatValue",
+                        column: x => x.BookFormatValue,
                         principalTable: "BookFormats",
-                        principalColumn: "Id",
+                        principalColumn: "Value",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -68,23 +68,23 @@ namespace App.Infrastructure.DataAccess.Migrations
 
             migrationBuilder.InsertData(
                 table: "BookFormats",
-                columns: new[] { "Id", "DisplayName" },
+                columns: new[] { "Value", "DisplayName" },
                 values: new object[] { 0, "Book" });
 
             migrationBuilder.InsertData(
                 table: "BookFormats",
-                columns: new[] { "Id", "DisplayName" },
+                columns: new[] { "Value", "DisplayName" },
                 values: new object[] { 1, "AudioBook" });
 
             migrationBuilder.InsertData(
                 table: "BookFormats",
-                columns: new[] { "Id", "DisplayName" },
+                columns: new[] { "Value", "DisplayName" },
                 values: new object[] { 2, "eBook" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Books_BookFormatId",
+                name: "IX_Books_BookFormatValue",
                 table: "Books",
-                column: "BookFormatId");
+                column: "BookFormatValue");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Reviews_BookId",

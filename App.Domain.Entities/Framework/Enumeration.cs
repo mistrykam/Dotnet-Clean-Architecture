@@ -9,13 +9,13 @@ namespace App.Domain.Entities.Framework
     {
         protected Enumeration() {}
 
-        protected Enumeration(int id, string displayName)
+        protected Enumeration(int value, string displayName)
         {
-            Id = id;
+            Value = value;
             DisplayName = displayName;
         }
 
-        public int Id { get; }
+        public int Value { get; }
 
         public string DisplayName { get; }
 
@@ -26,7 +26,7 @@ namespace App.Domain.Entities.Framework
 
         /// <summary>
         /// Key is the full name
-        /// Value contains the Enum (Id, DisplayName)
+        /// Value contains the Enum (Value, DisplayName)
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
@@ -54,25 +54,25 @@ namespace App.Domain.Entities.Framework
             }
 
             var typeMatches = GetType().Equals(obj.GetType());
-            var valueMatches = Id.Equals(otherValue.Id);
+            var valueMatches = Value.Equals(otherValue.Value);
 
             return typeMatches && valueMatches;
         }
 
         public override int GetHashCode()
         {
-            return Id.GetHashCode();
+            return Value.GetHashCode();
         }
 
         public static int AbsoluteDifference(Enumeration firstValue, Enumeration secondValue)
         {
-            var absoluteDifference = Math.Abs(firstValue.Id - secondValue.Id);
+            var absoluteDifference = Math.Abs(firstValue.Value - secondValue.Value);
             return absoluteDifference;
         }
 
         public static T FromValue<T>(int value) where T : Enumeration, new()
         {
-            var matchingItem = parse<T, int>(value, "value", item => item.Id == value);
+            var matchingItem = parse<T, int>(value, "value", item => item.Value == value);
             return matchingItem;
         }
 
@@ -104,7 +104,7 @@ namespace App.Domain.Entities.Framework
 
         public int CompareTo(object other)
         {
-            return Id.CompareTo(((Enumeration)other).Id);
+            return Value.CompareTo(((Enumeration)other).Value);
         }
     }
 }

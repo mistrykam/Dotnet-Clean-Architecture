@@ -12,7 +12,7 @@ namespace App.Domain.Entities.Enum
         {
         }
 
-        private BookFormatType(int id, string displayName) : base(id, displayName)
+        private BookFormatType(int value, string displayName) : base(value, displayName)
         {
         }
     }

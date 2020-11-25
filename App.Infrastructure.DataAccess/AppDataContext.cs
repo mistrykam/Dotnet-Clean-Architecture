@@ -23,8 +23,8 @@ namespace App.Infrastructure.DataAccess
             base.OnModelCreating(modelBuilder);
 
             // BookFormatType Enum mapping
-            modelBuilder.Entity<BookFormatType>().HasKey(x => x.Id  );
-            modelBuilder.Entity<BookFormatType>().Property(x => x.Id).HasDefaultValue(1).ValueGeneratedNever().IsRequired();
+            modelBuilder.Entity<BookFormatType>().HasKey(x => x.Value  );
+            modelBuilder.Entity<BookFormatType>().Property(x => x.Value).HasDefaultValue(1).ValueGeneratedNever().IsRequired();
             modelBuilder.Entity<BookFormatType>().Property(x => x.DisplayName).IsRequired();
 
             // Seed BookFormatType

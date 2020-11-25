@@ -42,7 +42,7 @@ namespace Test.App.Domain.Entities
 
             foreach (KeyValuePair<string, BookFormatType> item in list)
             {
-                System.Diagnostics.Debug.WriteLine($"{item.Key} {item.Value.Id} {item.Value.DisplayName}");
+                System.Diagnostics.Debug.WriteLine($"{item.Key} {item.Value.Value} {item.Value.DisplayName}");
             }
         }
     }
