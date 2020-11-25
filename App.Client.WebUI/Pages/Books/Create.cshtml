@@ -12,30 +12,30 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Book.Title" class="control-label"></label><span class="required">*</span>
-                <input asp-for="Book.Title" class="form-control" />
-                <span asp-validation-for="Book.Title" class="text-danger"></span>
+                <label asp-for="CreateBookCommand.Title" class="control-label"></label><span class="required">*</span>
+                <input asp-for="CreateBookCommand.Title" class="form-control" />
+                <span asp-validation-for="CreateBookCommand.Title" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Book.Author" class="control-label"></label><span class="required">*</span>
-                <input asp-for="Book.Author" class="form-control" />
-                <span asp-validation-for="Book.Author" class="text-danger"></span>
+                <label asp-for="CreateBookCommand.Author" class="control-label"></label><span class="required">*</span>
+                <input asp-for="CreateBookCommand.Author" class="form-control" />
+                <span asp-validation-for="CreateBookCommand.Author" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Book.BookFormat" class="control-label"></label>
-                <select asp-for="Book.BookFormat" class="form-control">
+                <label asp-for="CreateBookCommand.BookFormat" class="control-label"></label>
+                <select asp-for="CreateBookCommand.BookFormat" class="form-control">
                     <option value="">-- Select --</option>
                     @foreach (var item in Model.BookFormatOptions)
                     {
                         <option value="@item.Value">@item.DisplayName</option>
                     }
                 </select>
-                <span asp-validation-for="Book.BookFormat" class="text-danger"></span>
+                <span asp-validation-for="CreateBookCommand.BookFormat" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Book.PublishedDate" class="control-label"></label>
-                <input asp-for="Book.PublishedDate" class="form-control" type="date" />
-                <span asp-validation-for="Book.PublishedDate" class="text-danger"></span>
+                <label asp-for="CreateBookCommand.PublishedDate" class="control-label"></label>
+                <input asp-for="CreateBookCommand.PublishedDate" class="form-control" type="date" />
+                <span asp-validation-for="CreateBookCommand.PublishedDate" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

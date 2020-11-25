@@ -12,7 +12,7 @@ namespace App.Client.WebUI.Pages.Books
     public class CreateModel : PageModel
     {
         [BindProperty]
-        public CreateBookCommand Book { get; set; }
+        public CreateBookCommand CreateBookCommand { get; set; }
 
         public IEnumerable<BookFormatType> BookFormatOptions { get; set; }
 
@@ -43,7 +43,7 @@ namespace App.Client.WebUI.Pages.Books
                 return Page();
             }
 
-            await _mediatR.Send(Book);
+            await _mediatR.Send(CreateBookCommand);
 
             return RedirectToPage("./Index");
         }
