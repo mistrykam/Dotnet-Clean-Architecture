@@ -31,9 +31,6 @@ namespace App.Infrastructure.DataAccess.Migrations
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
 
-                    b.Property<int?>("BookFormatValue")
-                        .HasColumnType("int");
-
                     b.Property<int>("DislikeCount")
                         .HasColumnType("int");
 
@@ -50,41 +47,7 @@ namespace App.Infrastructure.DataAccess.Migrations
 
                     b.HasKey("BookId");
 
-                    b.HasIndex("BookFormatValue");
-
                     b.ToTable("Books");
-                });
-
-            modelBuilder.Entity("App.Domain.Entities.Enum.BookFormatType", b =>
-                {
-                    b.Property<int>("Value")
-                        .HasColumnType("int")
-                        .HasDefaultValue(1);
-
-                    b.Property<string>("DisplayName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Value");
-
-                    b.ToTable("BookFormats");
-
-                    b.HasData(
-                        new
-                        {
-                            Value = 0,
-                            DisplayName = "Book"
-                        },
-                        new
-                        {
-                            Value = 1,
-                            DisplayName = "AudioBook"
-                        },
-                        new
-                        {
-                            Value = 2,
-                            DisplayName = "eBook"
-                        });
                 });
 
             modelBuilder.Entity("App.Domain.Entities.Review", b =>
@@ -122,9 +85,23 @@ namespace App.Infrastructure.DataAccess.Migrations
 
             modelBuilder.Entity("App.Domain.Entities.Book", b =>
                 {
-                    b.HasOne("App.Domain.Entities.Enum.BookFormatType", "BookFormat")
-                        .WithMany()
-                        .HasForeignKey("BookFormatValue");
+                    b.OwnsOne("App.Domain.Entities.Enum.BookFormatType", "BookFormat", b1 =>
+                        {
+                            b1.Property<int>("BookId")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("int")
+                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                            b1.Property<int>("Value")
+                                .HasColumnType("int");
+
+                            b1.HasKey("BookId");
+
+                            b1.ToTable("Books");
+
+                            b1.WithOwner()
+                                .HasForeignKey("BookId");
+                        });
                 });
 
             modelBuilder.Entity("App.Domain.Entities.Review", b =>

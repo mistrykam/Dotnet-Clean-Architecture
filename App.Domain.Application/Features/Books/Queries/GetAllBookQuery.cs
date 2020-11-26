@@ -3,6 +3,7 @@ using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -33,8 +34,20 @@ namespace App.Domain.Application.Features.Books.Queries
 
         public async Task<IEnumerable<BookViewModel>> Handle(GetAllBooksQuery request, CancellationToken cancellationToken)
         {
-            return await _db.Books.ProjectTo<BookViewModel>(_mapper.ConfigurationProvider)
-                                  .ToListAsync();
+            //return await (from book in _db.Books.AsNoTracking()
+            //              select new BookViewModel 
+            //              { 
+            //                   BookId = book.BookId,
+            //                   Title = book.Title,
+            //                   Author = book.Author,
+            //                   BookFormat = book.BookFormat,
+            //                   PublishedDate = book.PublishedDate,
+            //                   LikeCount = book.LikeCount,
+            //                   DislikeCount = book.DislikeCount
+            //              }).ToListAsync();
+           
+            return await _db.Books.AsNoTracking().ProjectTo<BookViewModel>(_mapper.ConfigurationProvider)
+                                  .ToListAsync();            
         }
     }
 }

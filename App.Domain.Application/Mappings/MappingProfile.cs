@@ -12,6 +12,7 @@ namespace App.Domain.Application.Mappings
         public MappingProfile()
         {
             CreateMap<Book, BookViewModel>();
+                // .ForMember(dest => dest.BookFormat, opt => opt.MapFrom(src => src.BookFormat));
         }
     }
 }
