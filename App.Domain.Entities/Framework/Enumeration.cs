@@ -5,6 +5,8 @@ using System.Reflection;
 
 namespace App.Domain.Entities.Framework
 {
+    // https://lostechies.com/jimmybogard/2008/08/12/enumeration-classes/
+
     public abstract class Enumeration : IComparable
     {
         protected Enumeration() {}
