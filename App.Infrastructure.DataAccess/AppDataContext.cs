@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using App.Domain.Entities.Enum;
 using App.Domain.Entities.Framework;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace App.Infrastructure.DataAccess
 {
@@ -22,12 +23,20 @@ namespace App.Infrastructure.DataAccess
         {
             base.OnModelCreating(modelBuilder);
 
+            var bookFormatTypeConverterConverter = new ValueConverter<BookFormatType, int>(v => v.Value, v => Enumeration.FromValue<BookFormatType>(v));
+
             // Book
             modelBuilder.Entity<Book>().HasKey(x => x.BookId);
+
+/*            
             modelBuilder.Entity<Book>().OwnsOne(x => x.BookFormat)
                                        .Property(x => x.Value)
-                                       .HasConversion(v => v, v => Enumeration.FromValue<BookFormatType>(v).Value);
-            
+                                       .HasConversion(bookFormatTypeConverterConverter);
+*/
+            modelBuilder.Entity<Book>().Property(x => x.BookFormat)
+                                       .HasConversion(bookFormatTypeConverterConverter);
+
+
             /*
             // BookFormatType Enum mapping
             modelBuilder.Entity<BookFormatType>().HasKey(x => x.Value  );

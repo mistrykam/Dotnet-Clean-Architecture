@@ -15,7 +15,7 @@ namespace App.Infrastructure.DataAccess.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(maxLength: 256, nullable: false),
                     Author = table.Column<string>(maxLength: 256, nullable: false),
-                    BookFormat_Value = table.Column<int>(nullable: true),
+                    BookFormat = table.Column<int>(nullable: true),
                     PublishedDate = table.Column<DateTime>(nullable: true),
                     LikeCount = table.Column<int>(nullable: false),
                     DislikeCount = table.Column<int>(nullable: false)
