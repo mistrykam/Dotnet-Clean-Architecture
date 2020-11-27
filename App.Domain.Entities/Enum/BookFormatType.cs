@@ -5,9 +5,10 @@ namespace App.Domain.Entities.Enum
 {
     public class BookFormatType : Enumeration
     {
-        public static readonly BookFormatType Book = new BookFormatType(0, "Book");
-        public static readonly BookFormatType AudioBook = new BookFormatType(1, "AudioBook");
-        public static readonly BookFormatType EBook = new BookFormatType(2, "eBook");
+        public static readonly BookFormatType Paperback = new BookFormatType(0, "Paperback");
+        public static readonly BookFormatType Hardcover = new BookFormatType(1, "Hardcover");
+        public static readonly BookFormatType AudioBook = new BookFormatType(2, "Audio Book");
+        public static readonly BookFormatType EBook = new BookFormatType(3, "eBook Kindle");
 
         public BookFormatType()
         {
