@@ -9,11 +9,17 @@
 
 @foreach (var book in Model.BookViewModelList)
 {
-    <div class="row">
-        <div class="col">
-            <h4><a asp-page="/Books/Details" asp-route-bookId="@book.BookId">@book.Title</a></h4>
-        </div>
+<div class="row">
+    <div class="col">
+        <h4><a asp-page="/Books/Details" asp-route-bookId="@book.BookId">@book.Title</a></h4>
     </div>
+    <div class="col">
+        @book.BookFormat?.Value
+    </div>
+    <div class="col">
+       [@(book.BookFormat?.DisplayName)]
+    </div>
+</div>
 }
 
 <div class="row mt-3">

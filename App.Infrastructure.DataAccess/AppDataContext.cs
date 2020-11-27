@@ -25,7 +25,8 @@ namespace App.Infrastructure.DataAccess
             // Book
             modelBuilder.Entity<Book>().HasKey(x => x.BookId);
             modelBuilder.Entity<Book>().OwnsOne(x => x.BookFormat)
-                                       .Property(x => x.Value);
+                                       .Property(x => x.Value)
+                                       .HasConversion(v => v, v => Enumeration.FromValue<BookFormatType>(v).Value);
             
             /*
             // BookFormatType Enum mapping
