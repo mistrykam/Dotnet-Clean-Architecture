@@ -1,5 +1,6 @@
 ﻿using App.Domain.Application.Common;
 using App.Domain.Entities;
+using App.Domain.Entities.Enum;
 using App.Domain.Interfaces;
 using FluentValidation;
 using MediatR;
@@ -17,6 +18,8 @@ namespace App.Domain.Application.Features.Books.Commands
         public string Title { get; set; }
 
         public string Author { get; set; }
+
+        public BookFormatType BookFormat { get; set; }
 
         [DisplayName("Published Date")]
         public DateTime? PublishedDate { get; set; }
@@ -50,7 +53,7 @@ namespace App.Domain.Application.Features.Books.Commands
             }
             else
             {
-                book.Update(request.Title, request.Author, request.PublishedDate);
+                book.Update(request.Title, request.Author, request.PublishedDate, request.BookFormat);
 
                 await _db.SaveChangesAsync(cancellationToken);
 
