@@ -8,11 +8,11 @@
 @foreach (var book in Model.BookViewModelList)
 {
     <div class="row">
-        <div class="col">
+        <div class="col-sm-4">
             <h4><a asp-page="/Books/Details" asp-route-bookId="@book.BookId">@book.Title</a></h4>
         </div>
-        <div class="col">
-            @book.BookFormat?.DisplayName
+        <div class="col-sm-2">
+            @book.Author
         </div>
     </div>
 }
