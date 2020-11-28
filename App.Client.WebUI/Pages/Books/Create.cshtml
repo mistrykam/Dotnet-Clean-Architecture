@@ -23,12 +23,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="CreateBookCommand.BookFormat" class="control-label"></label>
-                <select asp-for="CreateBookCommand.BookFormat" class="form-control">
+                <select asp-for="CreateBookCommand.BookFormat" asp-items="Model.BookFormatOptions" class="form-control">
                     <option value="">-- Select --</option>
-                    @foreach (var item in Model.BookFormatOptions)
-                    {
-                        <option value="@item.Value">@item.DisplayName</option>
-                    }
                 </select>
                 <span asp-validation-for="CreateBookCommand.BookFormat" class="text-danger"></span>
             </div>

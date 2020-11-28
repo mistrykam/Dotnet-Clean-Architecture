@@ -29,8 +29,7 @@ namespace App.Client.WebUI.Pages.Books
         {
             BookFormatOptions = new SelectList(Enumeration.FindAll<BookFormatType>(), 
                                                nameof(BookFormatType.Value), 
-                                               nameof(BookFormatType.DisplayName), 
-                                               UpdateBookCommand.BookFormat);
+                                               nameof(BookFormatType.DisplayName));
         }
 
         public async Task OnGet(int bookId)
