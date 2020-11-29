@@ -1,9 +1,8 @@
-﻿using App.Domain.Interfaces;
+﻿using App.Domain.Common;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;

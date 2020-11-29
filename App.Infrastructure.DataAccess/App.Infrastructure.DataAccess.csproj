@@ -25,7 +25,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\App.Domain.Entities\App.Domain.Entities.csproj" />
-    <ProjectReference Include="..\App.Domain.Interfaces\App.Domain.Interfaces.csproj" />
+    <ProjectReference Include="..\App.Domain.Common\App.Domain.Common.csproj" />
   </ItemGroup>
 
 </Project>

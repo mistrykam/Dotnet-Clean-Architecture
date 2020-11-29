@@ -1,7 +1,7 @@
 ﻿using App.Domain.Application.Common;
 using App.Domain.Entities;
 using App.Domain.Entities.Enum;
-using App.Domain.Interfaces;
+using App.Domain.Common;
 using FluentValidation;
 using MediatR;
 using System;

@@ -1,5 +1,5 @@
 ﻿using App.Domain.Entities;
-using App.Domain.Interfaces;
+using App.Domain.Common;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;

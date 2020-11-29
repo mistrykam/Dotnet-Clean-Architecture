@@ -23,7 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.App.Infrastructure.Dat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Domain.Application", "App.Domain.Application\App.Domain.Application.csproj", "{E3F34E40-4E57-488B-9865-2626A4C0B3FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Domain.Interfaces", "App.Domain.Interfaces\App.Domain.Interfaces.csproj", "{305ADCA1-655C-4ED9-8981-73D4DEC3BAE9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Domain.Common", "App.Domain.Common\App.Domain.Common.csproj", "{305ADCA1-655C-4ED9-8981-73D4DEC3BAE9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
