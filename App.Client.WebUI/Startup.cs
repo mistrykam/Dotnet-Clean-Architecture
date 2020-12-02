@@ -1,6 +1,6 @@
 using App.Client.WebUI.Framework;
 using App.Domain.Application;
-using App.Domain.Common;
+using App.Domain.Common.Interfaces;
 using App.Infrastructure.DataAccess;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;

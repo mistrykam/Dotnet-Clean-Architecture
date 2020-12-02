@@ -1,4 +1,4 @@
-﻿using App.Domain.Common;
+﻿using App.Domain.Common.Interfaces;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using FluentValidation;
