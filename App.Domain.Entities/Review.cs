@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace App.Domain.Entities
 {
-    public class Review : IValidatableObject
+    public class Review
     {
         [Key]
         public int ReviewId { get; private set; }
@@ -34,14 +33,7 @@ namespace App.Domain.Entities
                 Comment = comment,
                 EmailAddress = emailAddress,
                 CreatedDateTime = DateTime.Now
-        };
+            };
+        }
     }
-
-    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-    {
-        List<ValidationResult> errors = new List<ValidationResult>();
-
-        return errors;
-    }
-}
 }

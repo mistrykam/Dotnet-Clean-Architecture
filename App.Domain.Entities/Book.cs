@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace App.Domain.Entities
 {
-    public class Book : IValidatableObject
+    public class Book
     {
         private List<Review> _reviews;
         private DateTime? _publishedDate;
@@ -82,13 +82,6 @@ namespace App.Domain.Entities
         public void AddReview(Review review)
         {
             _reviews.Add(review);
-        }
-
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        {
-            List<ValidationResult> errors = new List<ValidationResult>();
-
-            return errors;
         }
     }
 }
