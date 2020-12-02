@@ -14,9 +14,7 @@ The basic solution structure can be used to build Domain-Driven Design (DDD)-bas
 
 - [x] Clean Architecture
 - [x] CQRS with MediatR Library
-- [x] Entity Framework Core - Code First
+- [x] Entity Framework Core
 - [x] MediatR Pipeline 
-- [x] Response Wrappers
-- [x] Healthchecks
 - [x] Pagination
 - [x] Fluent Validation
