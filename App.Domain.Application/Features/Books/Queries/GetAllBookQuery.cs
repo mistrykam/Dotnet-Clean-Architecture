@@ -1,4 +1,4 @@
-﻿using App.Domain.Common.Interfaces;
+﻿using App.Domain.Interfaces;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using MediatR;

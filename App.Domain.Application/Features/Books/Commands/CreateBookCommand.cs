@@ -1,4 +1,4 @@
-﻿using App.Domain.Common.Interfaces;
+﻿using App.Domain.Interfaces;
 using App.Domain.Entities;
 using App.Domain.Entities.Enum;
 using FluentValidation;
